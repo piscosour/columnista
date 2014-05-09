@@ -1,0 +1,19 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Columnista</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+</head>
+
+<body>
+<div class="container"> <!-- Open main container -->
+    <div class="row" style="margin-top:20px">
+        <div class="span10 offset1">
+            {% for item in columna %}
+                <p class="lead">{{ item }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</div> <!-- Close main container -->
+</body>
+</html>

@@ -1,32 +1,13 @@
 # -*- coding: utf-8 -*-
 
-# 1. escoger un tema de coyuntura
-# 2. identificar entidad responsable
-# 3. si entidad = pública
-# 	--> privatización
-# 4. si entidad = privada
-# 	--> desregulación
-# 5. generar texto
-# 	primer párrafo: problem statement + identificar al responsable
-# 	segundo párrafo: "problema de fondo"
-# 	tercer párrafo: "solución"
+## Columnista v0.1 ##
 
+## Next steps ##
 
-# lista de problemas
-# educación
-# corrupción
-# salud
-# medio ambiente
-# infraestructura
-
-# entes responsables
-# Presidente
-# Congreso
-# Poder Judicial
-# Ministerio de Educación
-# Ministerio de Salud
-# Ministerio del Medio Ambiente
-# Municipalidad de Lima
+## 1. agregar variables: persona responsable + problem types
+## 2. agregar más variabilidad a las oraciones
+## 3. scrape news websites para determinar "el problema del día"
+## 4. generar permalinks para todas las columnas generadas
 
 import random
 from flask import Flask, render_template
@@ -108,7 +89,7 @@ def build_first_para(problem, entity):
 	else:
 		sentence2 = "Es hora de que el " + entity.name + " tome cartas en el asunto antes de que la situación empeore. "
 
-	return sentence1 + sentence2
+	return sentence1.decode('utf-8') + sentence2.decode('utf-8')
 
 def build_second_para(problem, entity):
 	if entity.category == "publico":
@@ -127,9 +108,9 @@ def build_second_para(problem, entity):
 	elif entity.category == 'conceptual':
 		sentence1 = 'El Perú se encuentra hoy persistiendo bajo el injusto azote del ' + entity.name + ' y quienes aún se declaran sus seguidores. '
 		sentence2 = 'Pero este tipo de entrampamientos ideológicos no hacen sino agravar los ya de por sí complicados problemas que enfrenta la ' + problem.name + ' peruana. '
-		sentence3 = 'Los defensores del ' + entity.name + ' harían bien en preguntarse: ¿Queremos vivir en un país donde la ' + problem.name + ' permanezca en le mismo marasmo en el que se ha encontrado las últimas dos décadas?'
+		sentence3 = 'Los defensores del ' + entity.name + ' harían bien en preguntarse: ¿Queremos vivir en un país donde la ' + problem.name + ' permanezca en el mismo marasmo en el que se ha encontrado las últimas dos décadas?'
 
-	return sentence1 + sentence2 + sentence3
+	return sentence1.decode('utf-8') + sentence2.decode('utf-8') + sentence3.decode('utf-8')
 
 def build_third_para(problem, entity):
 	if entity.category == "publico":
@@ -148,7 +129,7 @@ def build_third_para(problem, entity):
 		sentence2 = 'La prosperidad a la que todos aspiramos depende de nuestra capacidad para mejorar la ' + problem.name + ' para generar mayores oportunidades para todos los peruanos. '
 		sentence3 = 'El ' + entity.name + ', en cambio, no busca sino excluir del futuro del país a todos aquellos que no comulguen con sus principios e ideales.'
 
-	return sentence1 + sentence2 + sentence3
+	return sentence1.decode('utf-8') + sentence2.decode('utf-8') + sentence3.decode('utf-8')
 
 def gen_column():
 	parameters = problem_picker()
@@ -169,7 +150,7 @@ def gen_column():
 def render_column():
 	columna = gen_column()
 
-	return "<p>" + columna[0] + "</p><p>" + columna[1] + "</p><p>" + columna[2] + "</p>"
+	return render_template('base.html', columna=columna)
 
 if __name__ == "__main__":
 	app.debug = True
