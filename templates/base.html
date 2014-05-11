@@ -2,13 +2,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Columnista</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
 </head>
 
 <body>
 <div class="container"> <!-- Open main container -->
     <div class="row" style="margin-top:20px">
-        <div class="span10 offset1">
+        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
             {% for item in columna %}
                 <p class="lead">{{ item }}</p>
             {% endfor %}
